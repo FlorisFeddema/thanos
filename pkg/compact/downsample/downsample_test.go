@@ -1637,23 +1637,23 @@ func TestSamplesFromTSDBSamples(t *testing.T) {
 	for _, tcase := range []struct {
 		name string
 
-		input []tsdbutil.Sample
+		input []chunks.Sample
 
 		expected []sample
 	}{
 		{
 			name:     "empty",
-			input:    []tsdbutil.Sample{},
+			input:    []chunks.Sample{},
 			expected: []sample{},
 		},
 		{
 			name:     "one sample",
-			input:    []tsdbutil.Sample{testSample{1, 1}},
+			input:    []chunks.Sample{testSample{1, 1}},
 			expected: []sample{{1, 1}},
 		},
 		{
 			name:     "multiple samples",
-			input:    []tsdbutil.Sample{testSample{1, 1}, testSample{2, 2}, testSample{3, 3}, testSample{4, 4}, testSample{5, 5}},
+			input:    []chunks.Sample{testSample{1, 1}, testSample{2, 2}, testSample{3, 3}, testSample{4, 4}, testSample{5, 5}},
 			expected: []sample{{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}},
 		},
 	} {
@@ -1664,7 +1664,7 @@ func TestSamplesFromTSDBSamples(t *testing.T) {
 	}
 }
 
-// testSample implements tsdbutil.Sample interface.
+// testSample implements chunks.Sample interface.
 type testSample struct {
 	t int64
 	f float64

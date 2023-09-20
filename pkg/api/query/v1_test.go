@@ -44,7 +44,7 @@ import (
 	"github.com/prometheus/prometheus/storage"
 	"github.com/prometheus/prometheus/tsdb"
 	"github.com/prometheus/prometheus/tsdb/chunkenc"
-	"github.com/prometheus/prometheus/tsdb/tsdbutil"
+	"github.com/prometheus/prometheus/tsdb/chunks"
 	promgate "github.com/prometheus/prometheus/util/gate"
 	"github.com/prometheus/prometheus/util/stats"
 	baseAPI "github.com/thanos-io/thanos/pkg/api"
@@ -691,7 +691,7 @@ func TestMetadataEndpoints(t *testing.T) {
 	var series []storage.Series
 
 	for _, lbl := range old {
-		var samples []tsdbutil.Sample
+		var samples []chunks.Sample
 
 		for i := int64(0); i < 10; i++ {
 			samples = append(samples, sample{

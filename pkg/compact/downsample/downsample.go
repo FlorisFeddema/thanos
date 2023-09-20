@@ -24,7 +24,6 @@ import (
 	"github.com/prometheus/prometheus/tsdb/chunkenc"
 	"github.com/prometheus/prometheus/tsdb/chunks"
 	"github.com/prometheus/prometheus/tsdb/index"
-	"github.com/prometheus/prometheus/tsdb/tsdbutil"
 	"golang.org/x/sync/errgroup"
 
 	"github.com/thanos-io/objstore"
@@ -787,8 +786,8 @@ func (it *AverageChunkIterator) Err() error {
 	return it.err
 }
 
-// SamplesFromTSDBSamples converts tsdbutil.Sample slice to samples.
-func SamplesFromTSDBSamples(samples []tsdbutil.Sample) []sample {
+// SamplesFromTSDBSamples converts chunks.Sample slice to samples.
+func SamplesFromTSDBSamples(samples []chunks.Sample) []sample {
 	res := make([]sample, len(samples))
 	for i, s := range samples {
 		res[i] = sample{t: s.T(), v: s.F()}
